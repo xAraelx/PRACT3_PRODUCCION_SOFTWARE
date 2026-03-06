@@ -34,7 +34,7 @@ def add_expense(context, amount, title):
     )
 
 @when(parsers.parse("añado un gasto de {amount:d} euros del {fecha} llamado {title}"))
-def add_expense(context, amount, title,fecha):
+def add_expense_with_mount(context, amount, title,fecha):
     fecha_date = datetime.strptime(fecha, "%Y-%m").date()
     context["service"].create_expense(
         title=title, amount=amount, description="", expense_date=fecha_date
