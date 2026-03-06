@@ -92,7 +92,12 @@ def test_create_multiple_expenses_and_list():
     service = create_service()
     service.create_expense("Pan", 3, "Mercado", date(2025, 1, 10))
     service.create_expense("Leche", 4, "Supermercado", date(2025, 1, 11))
-    gastos = [("Pan","Leche"), (3,4), ("Mercado","Supermercado"), (date(2025, 1, 10),date(2025, 1, 11))]
+    gastos = [
+        ("Pan", "Leche"),
+        (3, 4),
+        ("Mercado", "Supermercado"),
+        (date(2025, 1, 10), date(2025, 1, 11)),
+    ]
     assert len(service.list_expenses()) == 2
     for i in range(len(service.list_expenses())):
         assert service.list_expenses()[i].title == gastos[0][i]
@@ -118,7 +123,10 @@ def test_remove_expense_reduces_total():
     service.create_expense("Revista", 15, "Quiosco", date(2025, 1, 11))
     gastosActuales = len(service.list_expenses())
     service.remove_expense(1)
-    assert len(service.list_expenses()) <= gastosActuales and len(service.list_expenses()) == 1
+    assert (
+        len(service.list_expenses()) <= gastosActuales
+        and len(service.list_expenses()) == 1
+    )
     gasto = ["Revista", 15, "Quiosco", date(2025, 1, 11)]
     for i in range(len(service.list_expenses())):
         assert service.list_expenses()[i].title == gasto[0]
@@ -141,7 +149,7 @@ def test_update_expense_partial_fields():
     """
     service = create_service()
     service.create_expense("Camiseta", 15, "Ropa", date(2025, 1, 10))
-    service.update_expense(1,"Camiseta", 18, "Ropa")
+    service.update_expense(1, "Camiseta", 18, "Ropa")
     gasto = ["Camiseta", 18, "Ropa", date(2025, 1, 10)]
     for i in range(len(service.list_expenses())):
         assert service.list_expenses()[i].title == gasto[0]

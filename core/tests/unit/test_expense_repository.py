@@ -59,7 +59,7 @@ def test_get_by_id_returns_expense():
     repo = InMemoryExpenseRepository()
     expense = create_expense()
     repo.save(expense)
-    recuperacion=repo.get_by_id(expense.id)
+    recuperacion = repo.get_by_id(expense.id)
     assert recuperacion.amount == expense.amount
 
 
