@@ -28,7 +28,7 @@ class ExpenseService:
         title: str,
         amount: float,
         description: str = "",
-        expense_date: date = None,
+        expense_date: date | None = None,
     ) -> Expense:
         if expense_date == None:
             expense_date = date.today()
@@ -52,6 +52,7 @@ class ExpenseService:
         title: str | None = None,
         amount: float | None = None,
         description: str | None = None,
+        expense_date: date | None = None,
     ) -> None:
         expense = self._repository.get_by_id(expense_id)
         if not expense:
@@ -62,6 +63,8 @@ class ExpenseService:
             expense.amount = amount
         if description is not None:
             expense.description = description
+        if expense_date is not None and expense_date < date.today():
+            expense.expense_date = expense_date
         self._repository.save(expense)
 
     def list_expenses(self) -> list[Expense]:
@@ -73,7 +76,7 @@ class ExpenseService:
         Debería de devolver la suma de los amounts de todos los Expenses, ahora mismo parece devolver 0 solamente.
         :return:
         """
-        return 0
+        return sum([expense.amount for expense in self.list_expenses()])
 
     def total_by_month(self) -> dict[str, float]:
         totals = defaultdict(float)

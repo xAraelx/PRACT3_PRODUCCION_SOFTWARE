@@ -1,6 +1,5 @@
 class DomainError(Exception):
     """Error base del dominio"""
-
     pass
 
 

@@ -22,6 +22,11 @@ class InMemoryExpenseRepository(ExpenseRepository):
         :return: None
         """
         ...
+        for i in range(len(self._expenses)):
+            if self._expenses[i].id == expense_id:
+                self._expenses.pop(i)
+                return
+
 
     def get_by_id(self, expense_id: int) -> Expense | None:
         return next(
