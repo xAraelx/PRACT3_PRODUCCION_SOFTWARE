@@ -64,3 +64,4 @@ Feature: Gestión de gastos
     And actualizo el gasto con id 1 a un gasto del 2025-12
     And elimino el gasto con id 1
     Then debe haber 0 gastos registrados
+
